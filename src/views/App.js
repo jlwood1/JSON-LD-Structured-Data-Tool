@@ -1,6 +1,6 @@
 import React from 'react';
 import DropdownWidget from '../components/DropdownWidget'; 
-
+import DynamicForm from '../components/DynamicForm';
 function App() {
   return (
     <div className = 'app-wrapper'>
@@ -17,7 +17,14 @@ function App() {
             Once you have completed the below form. You can automatically test your JSON-LD with googles rich results test and then download your JSON-LD script to use with your website content. 
           </span>
       </div> 
-      <DropdownWidget/>
+      <div className = 'dropdown-container'>
+        <h1 className = 'text-large'> Which type of schema do you want to create? </h1>
+        <DropdownWidget
+          placeHolder = 'Select Term...' 
+          options = {["Other...", "Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
+        />
+      </div>
+      <DynamicForm/>
     </div>
     
   );

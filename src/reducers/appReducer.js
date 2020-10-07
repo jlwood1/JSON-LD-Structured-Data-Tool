@@ -1,10 +1,14 @@
+
 const initialStore = {
-    app: null
+    dropdownValue: undefined, 
 }
 //reducer
-export default function reducer(store = initialStore, action) {
-    const {type, value} = action; 
+export default function appReducer(store = initialStore, action) {
+    const {type, payload} = action; 
     switch(type) {
+        case UPDATE_DROPDOWN: {
+            return {...store, dropdownValue: payload}
+        }
         default: {
             return {...store}
         }
@@ -13,16 +17,11 @@ export default function reducer(store = initialStore, action) {
 
 const UPDATE_DROPDOWN = "DROPDOWN_ON"; 
 
-export const updateDropdown = (dropdownState) => {
+export const updateDropdown = (dropdownVal) => {
     return {
-        Type: UPDATE_DROPDOWN, 
-        Payload: dropdownState
+        type: UPDATE_DROPDOWN, 
+        payload: dropdownVal 
     }
 
 }
-
-//action declarations 
-
-
-//action functions 
 

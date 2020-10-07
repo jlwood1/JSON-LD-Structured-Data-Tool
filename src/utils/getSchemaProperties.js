@@ -1,22 +1,6 @@
-const term = 'Movie'; 
+import getSchema from './getSchema'; 
 
-async function getSchema() {
-    const schemaURL = 'https://schema.org/version/latest/schemaorg-all-https.jsonld';
-    var response = await fetch(schemaURL)
-        .then(res => {
-            if(res.status !== 200) {
-                console.log('Looks like there was a problem. Status code: ' + res.status)
-                return; 
-            }
-            return res.json()
-        .catch(function() {
-            console.log('err')
-        }); 
-    });
-    return response; 
-}
-
-async function getSchemaProperties(term) {
+const getSchemaProperties = async (term) => {
     //first check if term exists 
     var domainIncludes = []; 
     const schema = await getSchema()
@@ -36,7 +20,7 @@ async function getSchemaProperties(term) {
             domainIncludesTerm.push(JSON.stringify(domainIncludes[i]));
         }
     }
-    console.log(domainIncludesTerm); 
+    return domainIncludesTerm;
 }
 
 function termExists(term, schemaGraph) {
@@ -48,4 +32,4 @@ function termExists(term, schemaGraph) {
     return false;
 }
 
-getSchemaProperties(term)
+export default getSchemaProperties; 
