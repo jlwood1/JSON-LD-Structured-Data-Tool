@@ -21,7 +21,7 @@ function App() {
         <h1 className = 'text-large'> Which type of schema do you want to create? </h1>
         <DropdownWidget
           placeHolder = 'Select Term...' 
-          options = {["Other...", "Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
+          options = {["Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
         />
       </div>
       <DynamicForm/>

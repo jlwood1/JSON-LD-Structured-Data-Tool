@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import getSchemaProperties from '../utils/getSchemaProperties';  
 
 let DynamicForm = (props) => {
-    let term = props.dropdownValue; 
+    const term = props.dropdownValue; 
     let schemaProperties = getSchemaProperties(term); 
     schemaProperties.then(function(result) {
         console.log(result)
@@ -14,6 +14,14 @@ let DynamicForm = (props) => {
                 <span className = 'form-header'>
                     <h1 className = 'text-large'>{term}</h1>
                 </span>
+                <form> 
+                    {/* <label className = 'input-text-label'> Name </label>
+                    <input 
+                        className = 'input-text'
+                        type = 'input'
+                        name = 'text' 
+                    /> */}
+                </form>
             </div>
         </div> 
     )

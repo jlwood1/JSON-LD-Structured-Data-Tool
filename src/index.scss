@@ -162,4 +162,28 @@ body {
   font-size: 24px;
 }
 
+.form form {
+  display: block; 
+  width: 80%; 
+  margin: auto;
+  margin-top: 3%;  
+}
 
+.input-text {
+  border: 2px solid #e6e7e8; 
+  position: relative; 
+  border-radius: 2px; 
+  font-family: "Rubik","Arial",sans-serif;
+  display: block; 
+  border-radius: 5px; 
+  padding: 2px; 
+}
+
+.input-text-label {
+  position: relative; 
+  display: block;
+  font-family: "Rubik","Arial",sans-serif;
+  color: #000000bf;
+  font-weight: 500; 
+  font-size: 20px; 
+}

@@ -16,10 +16,8 @@ let DropdownWidget = (props) => {
         setOpen(false)
     };
     useEffect(() => {
-        //add when mounted
         document.addEventListener("mousedown", handleClick)
 
-        //return function to be called when unmounted
         return () => {
             document.removeEventListener("mousedown", handleClick)
         };
