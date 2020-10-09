@@ -1,4 +1,5 @@
 import getSchema from './getSchema'; 
+import propertyExists from './propertyExists'; 
 
 const getSchemaProperties = async (term) => {
     //first check if term exists 
@@ -25,6 +26,8 @@ const getSchemaProperties = async (term) => {
     for(var i = 0; i < terms.length; i++) {
         properties.concat(getTermProperties(terms[i], schemaGraph));
     }
+    console.log(terms)
+    //filter properties
     return properties;
 }
 
@@ -50,21 +53,5 @@ function getTermProperties(term, schemaGraph) {
     return properties; 
 }
 
-function propertyExists (term, domainIncludes) {
-    if(domainIncludes.length) {
-        for(var i = 0; i < domainIncludes.length; i++) {
-            if(domainIncludes['@id'] === 'https://schema.org/' + term
-            || domainIncludes['@id'] === 'http://schema.org/' + term) {
-                return true; 
-            }
-        }        
-    } else {
-        if(domainIncludes['@id'] === 'https://schema.org/' + term
-        || domainIncludes['@id'] === 'http://schema.org/' + term) {
-            return true; 
-        }
-    }
-    return false; 
-}
 
 export default getSchemaProperties; 

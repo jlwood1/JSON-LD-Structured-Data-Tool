@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DropdownWidget from '../components/DropdownWidget'; 
 import DynamicForm from '../components/DynamicForm';
-function App() {
+import {connect} from 'react-redux';
+import {updateDropdown} from '../reducers/appReducer'; 
+import propertyExists from '../utils/propertyExists';
+
+let App = (props) => {
+  const [termDropdownValue, setDropdownValue] = useState(null); 
+  
+  const onUpdate = (type, value) => {
+    setDropdownValue(value)
+    props.updateDropdown(type, value)
+  }
+
   return (
     <div className = 'app-wrapper'>
       <div className = 'app-header'> 
@@ -22,12 +33,26 @@ function App() {
         <DropdownWidget
           placeHolder = 'Select Term...' 
           options = {["Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
+          dropdown = {'Term'}
+          dropdownValue = {termDropdownValue}
+          onUpdate = {onUpdate}
         />
       </div>
-      <DynamicForm/>
+      <DynamicForm
+       term = {termDropdownValue}
+      />
     </div>
     
   );
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+      termDropdown: state.app.termDropdown,
+  }
+}
+  
+App = connect(mapStateToProps, {updateDropdown})(App)
 
 export default App;
