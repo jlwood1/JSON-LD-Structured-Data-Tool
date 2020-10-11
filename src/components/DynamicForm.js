@@ -6,35 +6,48 @@ import DropdownWidget from './DropdownWidget';
 import {updateDropdown} from '../reducers/appReducer'
 
 let DynamicForm = (props) => {    
-    let showTypeDropdown = false; 
+    let showTypeDropdown = true; 
     const [dropdownValue, setDropdownValue] = useState(null); 
-    const [dropdownOptions, setDropdownOptions] = useState(null)
-    
+    const [typeDropdownOptions, setOptionsDropdown] = useState(null); 
+    let term = props.term
+
+    if(!typeDropdownOptions) {
+        showTypeDropdown = false; 
+    }
+
     const onUpdate = (type, value) => {
         setDropdownValue(value)
-        props.updateDropdown(type, value)
     }
+    const getOptions = async (term) => {
+        const response = await getSubTypes(term); 
+        setOptionsDropdown(response)
+    };
+
+    useEffect(() => {
+        if(term) {
+            getOptions(term);
+        }
+        //reset drop down 
+        setDropdownValue('Select Type...')
+    }, [term])
+
+
     return(
         <div className = 'form-wrapper'> 
             <div className = 'form'>
                 <span className = 'form-header'>
-                    <h1 className = 'text-large'>{props.term}</h1>
+                    <h1 key = {props.term} className = 'text-large'>{props.term}</h1>
                 </span>
                 <form> 
                     <DropdownWidget
-                     options = {dropdownOptions}
+                     options = {typeDropdownOptions}
                      showDropdown = {showTypeDropdown}
                      placeHolder = 'Select Type...'
                      dropdown = {'TypeOfTerm'}
                      onUpdate = {onUpdate}
                      dropdownValue = {dropdownValue}
+                     label = {term + ' Type'}
                     />
-                    {/* <label className = 'input-text-label'> Name </label>
-                    <input 
-                        className = 'input-text'
-                        type = 'input'
-                        name = 'text' 
-                    /> */}
                 </form>
             </div>
         </div> 

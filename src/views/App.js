@@ -6,12 +6,13 @@ import {updateDropdown} from '../reducers/appReducer';
 import propertyExists from '../utils/propertyExists';
 
 let App = (props) => {
-  const [termDropdownValue, setDropdownValue] = useState(null); 
+  const [termDropdownValue, setTermDropdown] = useState(null);
   
-  const onUpdate = (type, value) => {
-    setDropdownValue(value)
+  const onTermUpdate = (type, value) => {
+    setTermDropdown(value); 
     props.updateDropdown(type, value)
   }
+
 
   return (
     <div className = 'app-wrapper'>
@@ -35,11 +36,13 @@ let App = (props) => {
           options = {["Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
           dropdown = {'Term'}
           dropdownValue = {termDropdownValue}
-          onUpdate = {onUpdate}
+          onUpdate = {onTermUpdate}
+          showDropdown = {true}
         />
       </div>
       <DynamicForm
        term = {termDropdownValue}
+       update = {onTermUpdate}
       />
     </div>
     

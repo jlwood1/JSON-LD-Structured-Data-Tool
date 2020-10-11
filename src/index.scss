@@ -63,8 +63,8 @@ body {
 .dropdown-wrapper {
   width: 80%; 
   margin: auto;
-  margin-top: 3%; 
   cursor: pointer; 
+  display: inline-block; 
 }
 
 .dropdown {
@@ -73,6 +73,8 @@ body {
   background-color: #01579B; 
   width: 95%; 
   height: 30px; 
+  display: inline-block; 
+  position: relative; 
 }
 
 .dropdown-text {
@@ -91,8 +93,10 @@ body {
 }
 .dropdown-icon { 
   float: right; 
-  margin-right: 2%;
-  margin-top: 2%;  
+  margin: auto; 
+  position: absolute; 
+  right: 2%; 
+  top: 20%; 
 }
 .dropdown-content {
   width: 88%;
@@ -138,6 +142,17 @@ body {
   color: #000000bf;
   display: block;
 }
+
+.form-label {
+  font-size: 20px; 
+  font-family: "Rubik","Arial",sans-serif;  
+  color: #000000bf;
+  display: block;
+  margin: auto; 
+  font-weight: 550;
+  margin-bottom: 5px;  
+  width: 95%;  
+} 
 
 .form-wrapper {
   background-color: white; 
@@ -186,4 +201,9 @@ body {
   color: #000000bf;
   font-weight: 500; 
   font-size: 20px; 
+}
+
+.relative-position {
+  height: auto; 
+  width: auto; 
 }

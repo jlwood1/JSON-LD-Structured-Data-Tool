@@ -16,6 +16,9 @@ export default function appReducer(store = initialStore, action) {
                 case store.typeDropdown.dropdown: {
                     return { ...store, typeDropdown: {dropdownType: payload.dropdown, dropdownValue: payload.dropdownValue}}
                 }
+                default: {
+                    return {...store} 
+                }
             }
         }
         default: {
