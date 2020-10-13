@@ -4,6 +4,7 @@ import getSchemaProperties from '../utils/getSchemaProperties';
 import getSubTypes from '../utils/getSubTypes'; 
 import DropdownWidget from './DropdownWidget';
 import {updateDropdown} from '../reducers/appReducer'
+import Article from './ArticleForm'
 
 let DynamicForm = (props) => {    
     let showTypeDropdown = true; 
@@ -11,12 +12,14 @@ let DynamicForm = (props) => {
     const [typeDropdownOptions, setOptionsDropdown] = useState(null); 
     let term = props.term
 
+
     if(!typeDropdownOptions) {
         showTypeDropdown = false; 
     }
 
     const onUpdate = (type, value) => {
         setDropdownValue(value)
+        props.updateDropdown(type, value)
     }
     const getOptions = async (term) => {
         const response = await getSubTypes(term); 
@@ -38,16 +41,17 @@ let DynamicForm = (props) => {
                 <span className = 'form-header'>
                     <h1 key = {props.term} className = 'text-large'>{props.term}</h1>
                 </span>
-                <form> 
+                <form>
                     <DropdownWidget
-                     options = {typeDropdownOptions}
-                     showDropdown = {showTypeDropdown}
-                     placeHolder = 'Select Type...'
-                     dropdown = {'TypeOfTerm'}
-                     onUpdate = {onUpdate}
-                     dropdownValue = {dropdownValue}
-                     label = {term + ' Type'}
+                        options = {typeDropdownOptions}
+                        showDropdown = {showTypeDropdown}
+                        placeHolder = 'Select Type...'
+                        dropdown = {'TypeOfTerm'}
+                        onUpdate = {onUpdate}
+                        dropdownValue = {dropdownValue}
+                        label = {term + ' Type'}
                     />
+                    <Article /> 
                 </form>
             </div>
         </div> 
@@ -58,7 +62,6 @@ let DynamicForm = (props) => {
 const mapStateToProps = (state) => {
     return {
         typeDropdown: state.app.typeDropdown,
-        termDropdown: state.app.termDropdown
     }
   }
     

@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import dropdownicon  from '../assets/images/dropdown-icon.svg'; 
-import {updateDropdown} from '../reducers/appReducer';
-import {connect} from 'react-redux';
 
 let DropdownWidget = (props) => {
     const node = useRef(); 
@@ -30,7 +28,7 @@ let DropdownWidget = (props) => {
                 <div ref = {node} className = 'dropdown-wrapper' onClick = {() => {
                     setOpen(!open)
                 }}> 
-                    <label className = 'form-label'> {props.label} </label>
+                    <label className = 'dropdown-label'> {props.label} </label>
                     <div className = 'dropdown' >
                         <div className = 'dropdown-text'> {dropdownValue} </div>
                         <span className = 'dropdown-icon'><img className = 'icon-small' src= {dropdownicon}/> </span> 
@@ -52,7 +50,7 @@ let DropdownWidget = (props) => {
                 <div ref = {node} className = 'dropdown-wrapper' onClick = {() => {
                     setOpen(!open)
                 }}> 
-                    <label className = 'form-label'> {props.label} </label>
+                    <label className = 'dropdown-label'> {props.label} </label>
                     <div className = 'dropdown'>
                         <div className = 'dropdown-text'> {dropdownValue} </div>
                         <span className = 'dropdown-icon'> <img className = 'icon-small' src= {dropdownicon}/></span> 
