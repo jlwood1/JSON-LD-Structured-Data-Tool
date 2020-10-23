@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
-import getSchemaProperties from '../utils/getSchemaProperties';  
-import getSubTypes from '../utils/getSubTypes'; 
-import DropdownWidget from './DropdownWidget';
-import {updateDropdown} from '../reducers/appReducer'
-import Article from './ArticleForm'
+import getSubTypes from '../../utils/getSubTypes'; 
+import DropdownWidget from '../widgets/DropdownWidget';
+import {updateDropdown} from '../../reducers/appReducer'
+import ArticleForm from './ArticleForm'
+import EventForm from './EventForm'
+import ScriptContainer from '../ScriptContainer';
+import FAQWidget from '../widgets/FAQWidget';
+import JobPostingForm from './JobPostingForm'
+import LocalBusinessForm from './LocalBusinessForm'
+import OrganizationForm from './OrganizationForm'
 
 let DynamicForm = (props) => {    
     let showTypeDropdown = true; 
-    const [dropdownValue, setDropdownValue] = useState(null); 
     const [typeDropdownOptions, setOptionsDropdown] = useState(null); 
     let term = props.term
-
-
-    if(!typeDropdownOptions) {
+    if(!typeDropdownOptions || typeDropdownOptions.length === 0) {
         showTypeDropdown = false; 
     }
-
-    const onUpdate = (type, value) => {
-        setDropdownValue(value)
-        props.updateDropdown(type, value)
-    }
     const getOptions = async (term) => {
-        const response = await getSubTypes(term); 
+        const response = await getSubTypes(term.replace(/\s+/g, '')); 
         setOptionsDropdown(response)
     };
 
@@ -30,8 +27,6 @@ let DynamicForm = (props) => {
         if(term) {
             getOptions(term);
         }
-        //reset drop down 
-        setDropdownValue('Select Type...')
     }, [term])
 
 
@@ -41,19 +36,24 @@ let DynamicForm = (props) => {
                 <span className = 'form-header'>
                     <h1 key = {props.term} className = 'text-large'>{props.term}</h1>
                 </span>
-                <form>
+                <form autoComplete = "off">
                     <DropdownWidget
                         options = {typeDropdownOptions}
                         showDropdown = {showTypeDropdown}
                         placeHolder = 'Select Type...'
-                        dropdown = {'TypeOfTerm'}
-                        onUpdate = {onUpdate}
-                        dropdownValue = {dropdownValue}
+                        dropdown = {'typeDropdown'}
+                        onUpdate = {props.updateDropdown}
+                        dropdownValue = {props.typeDropdown}
                         label = {term + ' Type'}
                     />
-                    <Article /> 
+                    {
+                        props.term === "Article" ? <ArticleForm/> : props.term === 'Event' ? <EventForm/> : props.term === 'FAQ Page' ? <FAQWidget/> : props.term === 'Job Posting' ? <JobPostingForm/> : props.term === 'Local Business' ? <LocalBusinessForm/> : props.term === 'Organization' ? <OrganizationForm/> : null
+                    }
                 </form>
             </div>
+            <ScriptContainer 
+
+            />
         </div> 
     )
 }

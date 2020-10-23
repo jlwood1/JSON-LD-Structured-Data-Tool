@@ -22,12 +22,10 @@ const getSchemaProperties = async (term) => {
             termData = getTerm(parentTerm, schemaGraph)
         }
     }
+    
     //get term props 
-    for(var i = 0; i < terms.length; i++) {
-        properties.concat(getTermProperties(terms[i], schemaGraph));
-    }
-    console.log(terms)
-    //filter properties
+    properties = getTermProperties(terms, schemaGraph)
+    console.log(properties)
     return properties;
 }
 
@@ -40,16 +38,18 @@ function getTerm(term, schemaGraph) {
     return null;
 }
 
-function getTermProperties(term, schemaGraph) {
+function getTermProperties(terms, schemaGraph) {
     var properties = []; 
-    for(var i = 0; i < schemaGraph.length; i++) {
-        if(schemaGraph[i]['https://schema.org/domainIncludes']  && schemaGraph[i]['@type'] === 'rdf:Property') {
-            if(propertyExists(term, schemaGraph[i]['https://schema.org/domainIncludes'])) {
-                properties.push(schemaGraph[i]['@id'])
+    for(var x = 0; x < terms.length; x++) {
+        for(var i = 0; i < schemaGraph.length; i++) {
+            if(schemaGraph[i]['https://schema.org/domainIncludes']  && schemaGraph[i]['@type'] === 'rdf:Property') {
+                if(propertyExists(terms[x], schemaGraph[i]['https://schema.org/domainIncludes'])) {
+                    properties.push(schemaGraph[i]['@id'])
+                }
             }
         }
     }
-    console.log(properties); 
+
     return properties; 
 }
 

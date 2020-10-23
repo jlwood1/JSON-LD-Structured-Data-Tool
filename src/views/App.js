@@ -1,19 +1,10 @@
-import React, { useState } from 'react';
-import DropdownWidget from '../components/DropdownWidget'; 
-import DynamicForm from '../components/DynamicForm';
+import React from 'react';
+import DropdownWidget from '../components/widgets/DropdownWidget'; 
+import DynamicForm from '../components/forms/DynamicForm';
 import {connect} from 'react-redux';
 import {updateDropdown} from '../reducers/appReducer'; 
-import propertyExists from '../utils/propertyExists';
 
 let App = (props) => {
-  const [termDropdownValue, setTermDropdown] = useState(null);
-  
-  const onTermUpdate = (type, value) => {
-    setTermDropdown(value); 
-    props.updateDropdown(type, value)
-  }
-
-
   return (
     <div className = 'app-wrapper'>
       <div className = 'app-header'> 
@@ -24,25 +15,25 @@ let App = (props) => {
           <span className = 'about-content'>
             This tool is a <a href= "https://schema.org/" className = "link"> Schema.org </a> based structured data generator which can be used to easily create JSON-LD structured data for any type of website content. <br></br> <br></br> 
 
-            The tool has default options for common website content such as Articles, Events, FAQ Pages, How-To's, Job Postings etc... The tool also provides an option for 'Other'  which will allow you to manually enter a term which will be checked to make sure that it exists in the vocabulary provided at <a href= "https://schema.org/" className = "link"> Schema.org </a> here:  <a href = "Schema.org/version/latest/schemaorg-current-http.jsonld" className = "link"> Current Schema </a> <br></br> <br></br> 
+            The tool has default options for common website content such as Articles, Events, FAQ Pages, How-To's, Job Postings etc. <br></br><br></br>
 
             Once you have completed the below form. You can automatically test your JSON-LD with googles rich results test and then download your JSON-LD script to use with your website content. 
           </span>
       </div> 
-      <div className = 'dropdown-container'>
+      <div className = 'term-dropdown-container'>
         <h1 className = 'text-large'> Which type of schema do you want to create? </h1>
         <DropdownWidget
           placeHolder = 'Select Term...' 
-          options = {["Article", "Event", "FAQ Page", "How-to", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
-          dropdown = {'Term'}
-          dropdownValue = {termDropdownValue}
-          onUpdate = {onTermUpdate}
+          options = {["Article", "Event", "FAQ Page", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
+          dropdown = {'termDropdown'}
+          dropdownValue = {props.termDropdown}
+          onUpdate = {props.updateDropdown}
           showDropdown = {true}
         />
       </div>
       <DynamicForm
-       term = {termDropdownValue}
-       update = {onTermUpdate}
+       term = {props.termDropdown}
+       update = {props.updateDropdown}
       />
     </div>
     
