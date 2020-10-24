@@ -2,8 +2,12 @@
 export const editDynamicDropdown = (dropdowns, payload) => {
     switch(payload.dropdownAction) {
         case "Update": {
-            if(dropdowns[payload.id])
-                dropdowns[payload.id] = payload.dropdownValue; 
+            for(var i = 0; i < dropdowns.length; i++) {
+                if(dropdowns[i].dropdownId === payload.dropdownId) {
+                    dropdowns[i].dropdownValue = payload.dropdownValue
+                }
+            }
+            return [...dropdowns]
         }
         case "Add": {
             let dropdownItem = {dropdown: payload.dropdown, dropdownValue: payload.dropdownValue }

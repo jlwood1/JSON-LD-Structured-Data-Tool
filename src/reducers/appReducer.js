@@ -1,5 +1,7 @@
 import {editURL} from './helpers/editURL'
 import {editDynamicDropdown} from './helpers/editDynamicDropdowns'
+import {editDynamicSection} from './helpers/editDynamicSection'
+import { editScrollableCheckBoxes } from './helpers/editScrollableCheckBoxes';
 
 const initialStore = {
     termDropdown: null,
@@ -14,6 +16,7 @@ const initialStore = {
     localBusinessImageLinks: [],
     localBusinessSocialProfileLinks: [], 
     organizationSocialProfileLinks: [],
+    languagesScrollableCheckBoxes: [],
     qaSections: null, 
 }
 
@@ -51,28 +54,31 @@ export default function appReducer(store = initialStore, action) {
                     paymentRateDropdown = payload.dropdownValue 
                     return {...store, paymentRateDropdown: paymentRateDropdown}
                 }
+                case contactTypeDropdown: {
+                    let contactTypeDropdown = store.contactTypeDropdowns && store.contactTypeDropdowns.length ? [...store.contactTypeDropdowns] : []          
+                    contactTypeDropdown = editDynamicDropdown(contactTypeDropdown, payload)
+                    return { ...store, contactTypeDropdowns: contactTypeDropdown }
+                }
                 default: {
                     return {...store} 
-                }
-            }
-        }
-        case UPDATE_DYNAMIC_DROPDOWN: {
-            switch(payload.dropdown) {
-                 case contactTypeDropdown: {
-                    let dynamicDropdowns = store.contactTypeDropdowns && store.contactTypeDropdowns.length ? [...store.contactTypeDropdowns] : []          
-                    dynamicDropdowns = editDynamicDropdown(dynamicDropdowns, payload)
-                    return {...store, contactTypeDropdowns: dynamicDropdowns}
                 }
             }
         }
         case UPDATE_DYNAMIC_SECTION: {
             switch(payload.type) {
                 case contactSection: {
-                    let contactTypeDropdowns = store.contactTypeDropdowns && store.contactTypeDropdowns.length? [...store.contactTypeDropdowns] : []
-                    let dropdownPayload = {dropdown: 'contactTypeDropdown', dropdownValue: '', dropdownAction: 'Add', dropdownId: payload.sectionId}
-                    contactTypeDropdowns = editDynamicDropdown(contactTypeDropdowns, dropdownPayload)
-                    let contactSections = store.contactSections && store.contactSections.length ? [...store.contactSections] : []
-                    
+                    if(payload.action === 'Add') {
+                        let contactTypeDropdowns = store.contactTypeDropdowns && store.contactTypeDropdowns.length? [...store.contactTypeDropdowns] : []
+                        let dropdownPayload = {dropdown: 'contactTypeDropdown', dropdownValue: '', dropdownAction: 'Add', dropdownId: payload.sectionId}
+                        contactTypeDropdowns = editDynamicDropdown(contactTypeDropdowns, dropdownPayload)
+                        let contactSections = store.contactSections && store.contactSections.length ? [...store.contactSections] : []
+                        contactSections = editDynamicSection(contactSections, payload)
+                        let languageCheckBoxes = store.languageScrollableCheckBox && store.languagesScrollableCheckBox.length ? [...store.languagesScrollableCheckBoxes] : []
+                        let languageCheckBoxesPayload = { action: 'Add', id: payload.id }
+                        languageCheckBoxes = editScrollableCheckBoxes(languageCheckBoxes, languageCheckBoxesPayload)
+                        console.log(languageCheckBoxes)
+                        return {...store, contactSections: contactSections, contactTypeDropdowns: contactTypeDropdowns, languagesScrollableCheckBoxes: languageCheckBoxes}
+                    }
                 }
             }
         }
@@ -163,6 +169,16 @@ export default function appReducer(store = initialStore, action) {
                 }
             }
         }
+        case UPDATE_SCROLLABLE_CHECK_BOXES: {
+            switch(payload.type) {
+                case languagesScrollableCheckBox: {
+                    let scrollableCheckBox = store.languagesScrollableCheckBoxes.length ? [...store.languagesScrollableCheckBoxes] : []
+                    scrollableCheckBox = editScrollableCheckBoxes(scrollableCheckBox, payload)
+                    console.log(scrollableCheckBox)
+                    return {...store, languagesScrollableCheckBoxes: scrollableCheckBox}
+                }
+            }
+        }
         default: {
             return {...store}
         }
@@ -173,8 +189,8 @@ export default function appReducer(store = initialStore, action) {
 const UPDATE_DROPDOWN = "DROPDOWN_ON"; 
 const UPDATE_URL_LINKS = "UPDATE_URL_LINKS"; 
 const UPDATE_QA_SECTIONS = "UPDATE_QA_SECTIONS"; 
-const UPDATE_DYNAMIC_DROPDOWN = 'UPDATE_DYNAMIC_DROPDOWN';
 const UPDATE_DYNAMIC_SECTION = 'UPDATE_DYNAMIC_SECTION';
+const UPDATE_SCROLLABLE_CHECK_BOXES = 'UPDATE_SCROLLABLE_CHECK_BOXES'
 
 //links
 const articleImageLinks = 'articleImageLinks'
@@ -196,6 +212,9 @@ const contactSection = 'contactSection'
 //dynamic dropdown
 const contactTypeDropdown = 'contactTypeDropdown'; 
 
+//scrollable check boxes
+const languagesScrollableCheckBox = 'languagesScrollableCheckBox'
+
 
 export const updateQASections = (id, question, answer, action) => 
 {
@@ -205,17 +224,10 @@ export const updateQASections = (id, question, answer, action) =>
     }
 }   
 
-export const updateDropdown = (dropdown, dropdownVal) => {
+export const updateDropdown = (dropdown, dropdownVal, dropdownId, dropdownAction) => {
 
     return {
         type: UPDATE_DROPDOWN, 
-        payload: {dropdown: dropdown, dropdownValue: dropdownVal} 
-    }
-}
-
-export const updateDynamicDropdown = (dropdown, dropdownVal, dropdownId, dropdownAction) => {
-    return {
-        type: UPDATE_DYNAMIC_DROPDOWN, 
         payload: {dropdown: dropdown, dropdownValue: dropdownVal, dropdownId: dropdownId, dropdownAction: dropdownAction}
     }
 }
@@ -228,9 +240,17 @@ export const updateURLLink = (id, linkId, url, action) =>
     }
 }
 
-export const updateDynamicSection = (sectionId, sectionType) => {
+export const updateDynamicSection = (sectionId, sectionType, sectionAction) => {
     return {
         type: UPDATE_DYNAMIC_SECTION,
-        payload: {id: sectionId, type: sectionType}
+        payload: {id: sectionId, type: sectionType, action: sectionAction}
     }
 }
+
+export const updateScrollableCheckBoxes = (scrollableCheckBoxesType, scrollableCheckBoxesId, checkBoxCode, scrollableCheckBoxesAction) => {
+    return {
+        type: UPDATE_SCROLLABLE_CHECK_BOXES, 
+        payload: { type: scrollableCheckBoxesType, id: scrollableCheckBoxesId, action: scrollableCheckBoxesAction, code: checkBoxCode }
+    }
+}
+

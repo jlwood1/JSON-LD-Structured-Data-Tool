@@ -172,6 +172,15 @@ body {
   width: 95%;  
 } 
 
+.form-label-large {
+  font-size: 30px; 
+  font-family: "Rubik","Arial",sans-serif;  
+  color: #000000bf;
+  display: block;
+  font-weight: 600;
+  width: 95%;  
+}
+
 .form-wrapper {
   background-color: white; 
   float: right; 
@@ -367,12 +376,35 @@ body {
 .divider {
   margin: 15px; 
 }
-.dropdowns-list {
-  list-style-type: none;
+.contact-section-grid {
+  display: grid;
+  grid-template-columns: auto; 
+  grid-template-rows: 75px auto;
 }
-.dropdowns-list-item {
-  
+.contact-section {
+  margin-bottom: 30px;
 }
+.section-label {
+  font-size: 20px; 
+  font-family: "Rubik","Arial",sans-serif;  
+  color: #000000bf;
+  display: block;
+  font-weight: 550;
+  width: 95%;  
+  height: 30px; 
+  margin-top: 25px; 
+}
+.line-break {
+  width: auto; 
+  height: 2px; 
+  background-color: #e6e7e8; 
+}
+.scrollable-check-boxes {
+  width: auto; 
+  height: 200px; 
+  overflow-y: scroll; 
+}
+
 
 @media only screen and (min-width: 500px) {
   .dropdown-container {
