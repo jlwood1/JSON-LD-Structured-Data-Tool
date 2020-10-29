@@ -337,12 +337,11 @@ body {
 }
 
 .delete-button{
-  display: inline-block; 
   position: relative; 
   width: 24px; 
   height: 25px;
-  margin-left: 5px;  
   background-color: red; 
+  float: right;
   cursor: pointer; 
 }
 
@@ -376,7 +375,7 @@ body {
 .divider {
   margin: 15px; 
 }
-.contact-section-grid {
+.section-grid {
   display: grid;
   grid-template-columns: auto; 
   grid-template-rows: 75px auto;
@@ -385,14 +384,14 @@ body {
   margin-bottom: 30px;
 }
 .section-label {
-  font-size: 20px; 
+  font-size: 26px; 
   font-family: "Rubik","Arial",sans-serif;  
   color: #000000bf;
-  display: block;
+  display: inline-block;
   font-weight: 550;
-  width: 95%;  
+  width: auto;  
   height: 30px; 
-  margin-top: 25px; 
+  margin-top: 25px;  
 }
 .line-break {
   width: auto; 
@@ -404,8 +403,19 @@ body {
   height: 200px; 
   overflow-y: scroll; 
 }
+.scrollable-options-list {
+  list-style-type: none; 
+  padding-left: 0; 
 
-
+}
+.list-check-boxes {
+  margin-top: 10px; 
+}
+.relative-position {
+   position: relative; 
+   width: auto; 
+   height: auto; 
+}
 @media only screen and (min-width: 500px) {
   .dropdown-container {
     width: 360px; 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import DropdownWidget from '../widgets/DropdownWidget';
 import {connect} from 'react-redux';
-import {updateDropdown} from '../../reducers/appReducer'
+import {updateDropdown} from '../../reducers/widgetReducer'
 
 let JobPosting = (props) => {
     const [isRemoteJob, updateRemoteJob] = useState(0)

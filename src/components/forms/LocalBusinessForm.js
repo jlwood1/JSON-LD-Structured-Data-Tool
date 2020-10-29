@@ -1,6 +1,6 @@
 import React from 'react'; 
 import AddURLWidget from '../widgets/AddURLWidget'
-import {updateURLLink} from '../../reducers/appReducer';
+import {updateURLLink} from '../../reducers/widgetReducer';
 import {connect} from 'react-redux';
 import OpenHoursSpecificationWidget from '../widgets/OpenHoursSpecificationWidget'
 

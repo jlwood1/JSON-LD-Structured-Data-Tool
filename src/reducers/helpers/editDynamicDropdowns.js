@@ -16,10 +16,19 @@ export const editDynamicDropdown = (dropdowns, payload) => {
                 newDropdownId = payload.dropdownId
             dropdownItem.dropdownId = newDropdownId
             dropdowns.push(dropdownItem)
+            return dropdowns
         }
         case "Delete": {
+            for(var i = 0; i < dropdowns.length; i++) {
+                if(dropdowns[i].dropdownId === payload.dropdownId) {
+                    dropdowns.splice(i, 1)
+                }
+            }
+            for(var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].dropdownId = i;
+            }
+            return [...dropdowns]
         }
     }
-    return dropdowns; 
 } 
 

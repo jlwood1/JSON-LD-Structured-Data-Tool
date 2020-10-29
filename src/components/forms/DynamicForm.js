@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import getSubTypes from '../../utils/getSubTypes'; 
 import DropdownWidget from '../widgets/DropdownWidget';
-import {updateDropdown} from '../../reducers/appReducer'
+import {updateDropdown} from '../../reducers/widgetReducer'
 import ArticleForm from './ArticleForm'
 import EventForm from './EventForm'
 import ScriptContainer from '../ScriptContainer';
@@ -10,6 +10,11 @@ import FAQWidget from '../widgets/FAQWidget';
 import JobPostingForm from './JobPostingForm'
 import LocalBusinessForm from './LocalBusinessForm'
 import OrganizationForm from './OrganizationForm'
+import PersonForm from './PersonForm'
+import ProductForm from './ProductForm'
+import RecipeForm from './RecipeForm'
+import VideoForm from './VideoForm'
+import WebsiteForm from './WebsiteForm';
 
 let DynamicForm = (props) => {    
     let showTypeDropdown = true; 
@@ -29,7 +34,6 @@ let DynamicForm = (props) => {
         }
     }, [term])
 
-
     return(
         <div className = 'form-wrapper'> 
             <div className = 'form'>
@@ -47,7 +51,7 @@ let DynamicForm = (props) => {
                         label = {term + ' Type'}
                     />
                     {
-                        props.term === "Article" ? <ArticleForm/> : props.term === 'Event' ? <EventForm/> : props.term === 'FAQ Page' ? <FAQWidget/> : props.term === 'Job Posting' ? <JobPostingForm/> : props.term === 'Local Business' ? <LocalBusinessForm/> : props.term === 'Organization' ? <OrganizationForm/> : null
+                        props.term === "Article" ? <ArticleForm/> : props.term === 'Event' ? <EventForm/> : props.term === 'FAQ Page' ? <FAQWidget/> : props.term === 'Job Posting' ? <JobPostingForm/> : props.term === 'Local Business' ? <LocalBusinessForm/> : props.term === 'Organization' ? <OrganizationForm/> : props.term === 'Person' ? <PersonForm/> : props.term === 'Product' ? <ProductForm/> : props.term === 'Recipe' ? <RecipeForm/> : props.term === 'Video' ? <VideoForm/> : props.term === 'Website' ? <WebsiteForm/> : null
                     }
                 </form>
             </div>
@@ -57,7 +61,6 @@ let DynamicForm = (props) => {
         </div> 
     )
 }
-
 
 const mapStateToProps = (state) => {
     return {

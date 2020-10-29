@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownWidget from '../components/widgets/DropdownWidget'; 
 import DynamicForm from '../components/forms/DynamicForm';
 import {connect} from 'react-redux';
-import {updateDropdown} from '../reducers/appReducer'; 
+import {updateDropdown} from '../reducers/widgetReducer'; 
 
 let App = (props) => {
   return (

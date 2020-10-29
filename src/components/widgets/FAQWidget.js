@@ -1,5 +1,5 @@
 import React from 'react'
-import {updateQASections} from '../../reducers/appReducer'
+import {updateQASections} from '../../reducers/widgetReducer'
 import {connect} from 'react-redux';
 
 let FaqWidget = (props) => {

@@ -9,10 +9,18 @@ export const editDynamicSection = (sections, payload) => {
             
             sectionItem.sectionType = payload.type 
             sections.push(sectionItem)
+            return [...sections]
         }
         case "Delete": {
-            
+            for(var i = 0; i < sections.length; i++) {
+                if(sections[i].sectionId === payload.id) {
+                    sections.splice(i, 1)
+                }
+            }
+            for(var i = 0; i < sections.length; i++) {
+                sections[i].sectionId = i; 
+            }
+            return [...sections]
         }
     }
-    return sections
 }

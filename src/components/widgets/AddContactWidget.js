@@ -1,9 +1,10 @@
 import React from 'react'
 import DropdownWidget from './DropdownWidget'
-import {updateDropdown, updateDynamicSection, updateScrollableCheckBoxes} from '../../reducers/appReducer'
+import {updateDropdown, updateDynamicSection, updateScrollableCheckBoxes} from '../../reducers/widgetReducer'
 import {connect} from 'react-redux'
 import ScrollableCheckBoxesBox from './ScrollableCheckBoxesBox'
 import {languages} from '../../utils/staticdata/languages'
+import {areas} from '../../utils/staticdata/areas'
 
 let ContactWidget = (props) => {
     return (
@@ -14,20 +15,23 @@ let ContactWidget = (props) => {
                         <div className = 'contact-section'>
                             <label className = 'form-label-large'> Contacts </label>
                             {   
-                                props.contactSections.map(contactSections => (    
-                                    <div className = 'contact-section-grid' key = {contactSections.sectionId}>
-                                        <label className = 'section-label'> Contact {contactSections.sectionId + 1}</label>
+                                props.contactSections.map(contactSection => (    
+                                    <div className = 'section-grid' key = {contactSection.sectionId}>
+                                        <div className = 'relative-position'>
+                                            <label className = 'section-label'> Contact {contactSection.sectionId + 1}</label>
+                                            <div className = 'delete-button' onClick = {() => {props.updateDynamicSection(contactSection.sectionId, 'contactSection', 'Delete')}}> <i className = 'delete-icon'> x </i>  </div> 
+                                        </div>
                                         <div className = 'grid-item'>
-                                            <DropdownWidget key = {contactSections.sectionId}
+                                            <DropdownWidget key = {contactSection.sectionId}
                                                 options={['None', 'Customer Service', 'Technical Support', 'Billing Support', 'Bill Payment', 'Sales', 'Reservations', 'Credit card support', 'Emergency', 'Baggage tracking', 'Roadside Assistance', 'Package Tracking']}
                                                 showDropdown = {true}
                                                 placeHolder = {'Select Type...'}
                                                 dropdown = {'contactTypeDropdown'}
                                                 onUpdate = {props.updateDropdown}
-                                                dropdownValue = {props.contactTypeDropdown[contactSections.sectionId].dropdownValue}
+                                                dropdownValue = {props.contactTypeDropdown[contactSection.sectionId].dropdownValue}
                                                 label = {'Contact Type'}
                                                 isMultiple = {true}
-                                                dropdownId = {contactSections.sectionId}
+                                                dropdownId = {contactSection.sectionId}
                                             />
                                         </div>
                                         <div className = 'grid-item'>
@@ -58,9 +62,24 @@ let ContactWidget = (props) => {
                                             <ScrollableCheckBoxesBox
                                                 options = {languages}  
                                                 onUpdate = {props.updateScrollableCheckBoxes}
-                                                type = 'languagesScrollableCheckBox'
+                                                type = 'languagesScrollableCheckBoxes'
+                                                label = 'Languages'
+                                                id = {contactSection.sectionId}
+                                                data = {props.languagesScrollableCheckBoxes[contactSection.sectionId]}
                                             />
                                         </div>
+                                        <div className = 'grid-item'> 
+                                            <ScrollableCheckBoxesBox
+                                                options = {areas}  
+                                                onUpdate = {props.updateScrollableCheckBoxes}
+                                                type = 'areasScrollableCheckBoxes'
+                                                label = 'Areas'
+                                                id = {contactSection.sectionId}
+                                                data = {props.areasScrollableCheckBoxes[contactSection.sectionId]}
+                                            />
+                                        </div>
+                                        <div className = 'line-break'></div>
+
                                     </div>
                                     )
                                 )
@@ -81,7 +100,8 @@ let mapStateToProps = (state) => {
     return {
         contactTypeDropdown: state.app.contactTypeDropdowns,
         contactSections: state.app.contactSections, 
-        languagesScrollableCheckBoxes: state.app.languagesScrollableCheckBoxes
+        languagesScrollableCheckBoxes: state.app.languagesScrollableCheckBoxes, 
+        areasScrollableCheckBoxes: state.app.areasScrollableCheckBoxes
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'; 
 import AddURLWidget from '../widgets/AddURLWidget'
 import {connect} from 'react-redux';
-import {updateURLLink} from '../../reducers/appReducer';
+import {updateURLLink} from '../../reducers/widgetReducer';
 
 
 let EventForm = (props) => {

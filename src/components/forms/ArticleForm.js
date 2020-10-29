@@ -1,6 +1,6 @@
 import React from 'react';
 import AddURLWidget from '../widgets/AddURLWidget'
-import {updateDropdown, updateURLLink} from '../../reducers/appReducer';
+import {updateDropdown, updateURLLink} from '../../reducers/widgetReducer';
 import {connect} from 'react-redux';
 import DropdownWidget from '../widgets/DropdownWidget';
 
