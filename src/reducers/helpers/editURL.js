@@ -16,6 +16,7 @@ export const editURL = (links, payload) => {
 
 
 const updateURL = (links, payload) => {
+    console.log(payload.id)
     for(var i = 0; i < links.length; i++) {
         if(links[i].id === payload.id) {
             links[i].url = payload.url

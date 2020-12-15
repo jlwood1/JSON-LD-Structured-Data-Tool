@@ -1,8 +1,9 @@
 import React from 'react'
-import {updateQASections} from '../../reducers/widgetReducer'
+import {updateQASections} from '../../reducers/formReducer'
 import {connect} from 'react-redux';
 
 let FaqWidget = (props) => {
+    console.log(props.qaSections)
     return (
         <div className = 'faq-widget-wrapper'> 
             {
@@ -35,7 +36,7 @@ let FaqWidget = (props) => {
 
 const mapStateToProps = (state) =>  {
     return {
-        qaSections: state.app.qaSections
+        qaSections: state.form.faqData.qaSection
     }
 }
 

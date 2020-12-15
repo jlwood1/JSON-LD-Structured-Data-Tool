@@ -40,9 +40,9 @@ let DropdownWidget = (props) => {
                                     props.options.map(opt => (
                                         <li key = {opt} className = 'dropdown-list-item' onClick = {() => {
                                             if(props.isMultiple) {
-                                                props.onUpdate(props.dropdown, opt, props.dropdownId, "Update")
+                                                props.onUpdate(props.dropdownId, opt, props.form, "Update", props.sectionId)
                                             } else {
-                                                props.onUpdate(props.dropdown, opt, '', '')
+                                                props.onUpdate(props.dropdownId, opt, props.form)
                                             }
                                         }}> {opt} </li>
                                     ))

@@ -416,6 +416,15 @@ body {
    width: auto; 
    height: auto; 
 }
+.script-line{
+  display: block; 
+  height: auto; 
+  width: 95%; 
+  margin: 0 auto; 
+}
+.json-ld-script {
+  font-size: 20px; 
+}
 @media only screen and (min-width: 500px) {
   .dropdown-container {
     width: 360px; 

@@ -1,8 +1,8 @@
 import {createStore, combineReducers} from 'redux';
-import reducer from './reducers/widgetReducer';
+import formReducer from './reducers/formReducer'
 
 const rootReducer = combineReducers({
-    app: reducer
+    form: formReducer
 }); 
 
 export default createStore(rootReducer);

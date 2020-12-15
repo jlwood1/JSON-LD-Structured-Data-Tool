@@ -16,7 +16,7 @@ let ScrollableCheckBoxesBox = (props) => {
                                     <div className = 'inline'>
                                         <label className = 'form-label'> {item.text}</label>
                                         <input value = {item.code} type = 'checkbox' onChange = {(event) =>{
-                                            props.onUpdate(props.type, props.id, item.code, 'Update')
+                                            props.onUpdate(props.type, props.id, props.form, item.code, 'Update')
                                         }} checked = { props.data.includes(item.code) ? true : false}/>
                                     </div>
                                 </li>

@@ -1,53 +1,39 @@
 import React, {useState} from 'react'
 
 let OpenHoursSpecificationWidget = (props) => {
-    const [showDays, onAddHours] = useState(false)
-    const [mondayChecked, onMondayChecked] = useState(false)
-    const [tuesdayChecked, onTuesdayChecked] = useState(false)
-    const [wednesdayChecked, onWednesdayChecked] = useState(false)
-    const [thursdayChecked, onThursdayChecked] = useState(false)
-    const [fridayChecked, onFridayChecked] = useState(false)
-    const [saturdayChecked, onSaturdayChecked] = useState(false)
-    const [sundayChecked, onSundayChecked] = useState(false)
-    
+    console.log(props.openHours)
     return (
         <div className = 'open-hours-specification-wrapper'>
             {
-                showDays ? 
+                props.openHours.showDays ? 
                     <div className = 'open-hours'> 
                         <div className = 'right-aligned delete-button'  onClick = {() => {
-                                let isShowingDays = showDays ? false : true; 
-                                onMondayChecked(false)
-                                onTuesdayChecked(false)
-                                onWednesdayChecked(false)
-                                onThursdayChecked(false)
-                                onFridayChecked(false)
-                                onSaturdayChecked(false)
-                                onSundayChecked(false)
-
-                                onAddHours(isShowingDays)
+                                props.onUpdate(props.id, '', '', 'Delete', props.form)
                             }}> 
                             <i className = 'delete-icon'> x </i>
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
                                 <input className = 'day-checkbox' type = 'checkBox' id = 'monday' onChange = {() => {
-                                    let isMondayChecked = mondayChecked ? false : true 
-                                    onMondayChecked(isMondayChecked)
+                                    props.onUpdate(props.id, 'monday', '', 'Update', props.form, )
                                 }}/>
                                 <label className = 'form-label'> Monday </label>
                             </div>
                             {
-                                mondayChecked ? 
+                                props.openHours.monday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'> 
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'monday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'monday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'mondayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'monday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'monday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'mondayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>
@@ -56,23 +42,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'tuesday' onChange = {() => {
-                                    let isTuesdayChecked = tuesdayChecked ? false : true 
-                                    onTuesdayChecked(isTuesdayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'tuesday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'tuesday', '', 'Update', props.form) 
                                 }}/>
                                 <label className = 'form-label'> Tuesday </label>
                             </div>
                             {
-                                tuesdayChecked ? 
+                                props.openHours.tuesday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'tuesday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'tuesday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'tuesdayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'tuesday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'tuesday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'tuesdayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>
@@ -81,23 +70,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'wednesday' onChange = {() => {
-                                    let isWednesdayChecked = wednesdayChecked ? false : true 
-                                    onWednesdayChecked(isWednesdayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'wednesday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'wednesday', '', 'Update', props.form) 
                                 }}/>
                                 <label className = 'form-label'> Wednesday </label>
                             </div>
                             {
-                                wednesdayChecked ? 
+                                props.openHours.wednesday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'wednesday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'wednesday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'wednesdayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'wednesday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'wednesday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'wednesdayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>
@@ -106,23 +98,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'thursday' onChange = {() => {
-                                    let isThursdayChecked = thursdayChecked ? false : true 
-                                    onThursdayChecked(isThursdayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'thursday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'thursday', event.target.value, 'Update', props.form)
                                 }}/>
                                 <label className = 'form-label'> Thursday </label>
                             </div>
                             {
-                                thursdayChecked ? 
+                                props.openHours.thursday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'thursday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'thursday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'thursdayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'thursday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'thursday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'thursdayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>
@@ -131,23 +126,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'friday' onChange = {() => {
-                                    let isFridayChecked = fridayChecked ? false : true; 
-                                    onFridayChecked(isFridayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'friday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'friday', '', 'Update', props.form)
                                 }}/>
                                 <label className = 'form-label'> Friday </label>
                             </div>
                             {
-                                fridayChecked ? 
+                                props.openHours.friday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'friday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'friday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'fridayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'friday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'friday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'fridayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>
@@ -156,23 +154,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'saturday' onChange = {() => {
-                                    let isSaturdayChecked = saturdayChecked ? false : true 
-                                    onSaturdayChecked(isSaturdayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'saturday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'saturday', '', 'Update', props.form)
                                 }}/>
                                 <label className = 'form-label'> Saturday </label>
                             </div>
                             {
-                                saturdayChecked ? 
+                                props.openHours.saturday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'saturday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'saturday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'saturdayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'saturday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'saturday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'saturdayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div> 
                                     </div>
@@ -181,23 +182,26 @@ let OpenHoursSpecificationWidget = (props) => {
                         </div>
                         <div className = 'grid-item'>
                             <div className = 'inline'>
-                                <input className = 'day-checkbox' type = 'checkBox' id = 'sunday' onChange = {() => {
-                                    let isSundayChecked = sundayChecked ? false : true
-                                    onSundayChecked(isSundayChecked)
+                                <input className = 'day-checkbox' type = 'checkBox' id = 'sunday' onChange = {(event) => {
+                                    props.onUpdate(props.id, 'sunday', '', 'Update', props.form)
                                 }}/>
                                 <label className = 'form-label'> Sunday </label>
                             </div> 
                             {
-                                sundayChecked ? 
+                                props.openHours.sunday ? 
                                     <div className = 'day-hours'>
                                         <div className = 'inline'>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Opens </label>
-                                                <input className = 'input-text' type = "time" id = 'sunday-open-time'/>
+                                                <input className = 'input-text' type = "time" id = 'sunday-open-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'sundayOpen', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                             <div className = 'text-box-wrapper'>
                                                 <label className = 'form-label'> Closes </label>
-                                                <input className = 'input-text' type = "time" id = 'sunday-close-time'/>
+                                                <input className = 'input-text' type = "time" id = 'sunday-close-time' onChange = {(event) => {
+                                                    props.onUpdate(props.id, 'sundayClose', event.target.value, 'Update', props.form)
+                                                }}/>
                                             </div>
                                         </div> 
                                     </div>
@@ -207,11 +211,15 @@ let OpenHoursSpecificationWidget = (props) => {
                     </div>
                 : ''
             }
-            <div className = 'add-button' onClick = {() => {
-                    onAddHours(true)
-                }}>
-                <h2 className = 'button-text'> <i className = 'add-icon'> + </i> Add Hours </h2>
-            </div>
+            {
+                !props.openHours.showDays ? 
+                    <div className = 'add-button' onClick = {() => {
+                            props.onUpdate(props.id, '', '', 'Add', props.form)
+                        }}>
+                        <h2 className = 'button-text'> <i className = 'add-icon'> + </i> Add Hours </h2>
+                    </div>
+                : ''
+            }
         </div>
     )
 }

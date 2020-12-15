@@ -11,8 +11,8 @@ let AddURLWidget = (props) => {
                             props.links.map(link => (
                                 <li key = {link.id} className = 'image-link'>
                                     <label className = 'form-label'> {props.type} {link.id} URL </label>
-                                    <input className = 'input-text' type="text" value ={link.url} onChange = {(event) => {props.onURLUpdate(props.id, link.id, event.target.value, 'Update')}}/> 
-                                    <div className = 'delete-button' onClick = {() => {props.onURLUpdate(props.id, link.id, '', 'Delete')}}> <i className = 'delete-icon'> x </i>  </div> 
+                                    <input className = 'input-text' type="text" value ={link.url} onChange = {(event) => {props.onURLUpdate(props.id, link.id, props.form, event.target.value, 'Update', props.form)}}/> 
+                                    <div className = 'delete-button' onClick = {() => {props.onURLUpdate(props.id, link.id, props.form, '', 'Delete')}}> <i className = 'delete-icon'> x </i>  </div> 
                                 </li>
                             )) 
                     }
@@ -21,7 +21,7 @@ let AddURLWidget = (props) => {
                     ''
             }
             <div className = 'add-button' onClick = {() => {
-                props.onURLUpdate(props.id, '', '', "Add")
+                props.onURLUpdate(props.id, '', props.form, '', "Add")
             }}> 
                 <h2 className = 'button-text'> <i className = 'add-icon'> + </i> Add {props.type} </h2> 
             </div>

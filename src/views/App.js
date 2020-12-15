@@ -2,7 +2,7 @@ import React from 'react';
 import DropdownWidget from '../components/widgets/DropdownWidget'; 
 import DynamicForm from '../components/forms/DynamicForm';
 import {connect} from 'react-redux';
-import {updateDropdown} from '../reducers/widgetReducer'; 
+import {updateDropdown} from '../reducers/formReducer'; 
 
 let App = (props) => {
   return (
@@ -25,10 +25,11 @@ let App = (props) => {
         <DropdownWidget
           placeHolder = 'Select Term...' 
           options = {["Article", "Event", "FAQ Page", "Job Posting", "Local Business", "Organization", "Person", "Product", "Recipe", "Video", "Website"]}
-          dropdown = {'termDropdown'}
+          dropdownId = {'termDropdown'}
           dropdownValue = {props.termDropdown}
           onUpdate = {props.updateDropdown}
           showDropdown = {true}
+          form = 'APP'
         />
       </div>
       <DynamicForm
@@ -43,7 +44,7 @@ let App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-      termDropdown: state.app.termDropdown,
+      termDropdown: state.form.termDropdown,
   }
 }
   

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 import getSubTypes from '../../utils/getSubTypes'; 
 import DropdownWidget from '../widgets/DropdownWidget';
-import {updateDropdown} from '../../reducers/widgetReducer'
+import {updateDropdown} from '../../reducers/formReducer'
 import ArticleForm from './ArticleForm'
 import EventForm from './EventForm'
 import ScriptContainer from '../ScriptContainer';
@@ -45,10 +45,11 @@ let DynamicForm = (props) => {
                         options = {typeDropdownOptions}
                         showDropdown = {showTypeDropdown}
                         placeHolder = 'Select Type...'
-                        dropdown = {'typeDropdown'}
+                        dropdownId = {'typeDropdown'}
                         onUpdate = {props.updateDropdown}
                         dropdownValue = {props.typeDropdown}
                         label = {term + ' Type'}
+                        form = 'DYNAMIC_FORM'
                     />
                     {
                         props.term === "Article" ? <ArticleForm/> : props.term === 'Event' ? <EventForm/> : props.term === 'FAQ Page' ? <FAQWidget/> : props.term === 'Job Posting' ? <JobPostingForm/> : props.term === 'Local Business' ? <LocalBusinessForm/> : props.term === 'Organization' ? <OrganizationForm/> : props.term === 'Person' ? <PersonForm/> : props.term === 'Product' ? <ProductForm/> : props.term === 'Recipe' ? <RecipeForm/> : props.term === 'Video' ? <VideoForm/> : props.term === 'Website' ? <WebsiteForm/> : null
@@ -64,7 +65,7 @@ let DynamicForm = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        typeDropdown: state.app.typeDropdown,
+        typeDropdown: state.form.typeDropdown,
     }
   }
     
